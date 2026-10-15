@@ -1712,13 +1712,15 @@ footer {
                             <i class="bi bi-instagram"></i>
                         </a>
 
-                        <a href="hannaahanna74@gmail.com"
-                            title="Email">
+                        <!-- <a href="mailto:hannaahanna74@gmail.com"
+                            title="Email">Email
 
                             <i class="bi bi-envelope"></i>
 
-                        </a>
-
+                        </a> -->
+<a href="mailto:hannaahanna74@gmail.com" title="Email" class="email-btn">
+    <i class="bi bi-envelope"></i>
+</a>
                     </div>
 
                 </div>
@@ -2222,13 +2224,13 @@ footer {
 
                         </div>
 
-                        <a href="#"
+                        <!-- <a href="#"
                             class="project-link">
 
                             View Project
                             <i class="bi bi-arrow-up-right"></i>
 
-                        </a>
+                        </a> -->
 
                     </div>
 
@@ -2272,13 +2274,13 @@ footer {
 
                         </div>
 
-                        <a href="#"
+                        <!-- <a href="#"
                             class="project-link">
 
                             View Project
                             <i class="bi bi-arrow-up-right"></i>
 
-                        </a>
+                        </a> -->
 
                     </div>
 
@@ -2322,13 +2324,13 @@ footer {
 
                         </div>
 
-                        <a href="#"
+                        <!-- <a href="#"
                             class="project-link">
 
                             View Project
                             <i class="bi bi-arrow-up-right"></i>
 
-                        </a>
+                        </a> -->
 
                     </div>
 
@@ -2625,7 +2627,7 @@ footer {
 
     <!-- Custom JS -->
 
-    <script src="script.js">
+    <script>
         // =========================================
 // NAVBAR SCROLL EFFECT
 // =========================================
@@ -2751,21 +2753,59 @@ navLinksMobile.forEach(link => {
 // CONTACT FORM
 // =========================================
 
-const contactForm =
-    document.getElementById("contactForm");
+// const contactForm =
+//     document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", function (event) {
+// contactForm.addEventListener("submit", function (event) {
 
+//     event.preventDefault();
+
+//     alert(
+//         "Thank you for contacting me! I will get back to you soon."
+//     );
+
+//     contactForm.reset();
+
+// });
+
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init({
+    publicKey: "gTEo6DBqf_z_JHySE"
+  });
+
+  
+document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    alert(
-        "Thank you for contacting me! I will get back to you soon."
-    );
+    const form = this;
+    const inputs = form.querySelectorAll("input");
+    const message = form.querySelector("textarea").value;
 
-    contactForm.reset();
+    const templateParams = {
+        name: inputs[0].value,
+        email: inputs[1].value,
+        time: new Date().toLocaleString(),
+        message: message
+    };
 
+    emailjs.send(
+        "service_connect12port",
+        "template_l4ct93x",
+        templateParams
+    ).then(function() {
+        alert("Message sent successfully!");
+        form.reset();
+    }).catch(function(error) {
+        console.error("EmailJS error:", error);
+        alert("Message could not be sent. Please try again.");
+    });
 });
-    </script>
+</script>
 
 </body>
 
